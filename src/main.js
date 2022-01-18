@@ -1,17 +1,19 @@
 const $ul = $('.mainContent > ul')
 const $dataList = $('.dataList')
-const $puls = $('.plus')
-const dataList = JSON.parse(localStorage.getItem('x')) || [
+const $add = $('.plus')
+const dataList = JSON.parse(localStorage.getItem('data')) || [
     { src: "https://www.baidu.com//favicon.ico", text: "baidu.com" },
     { src: "https://www.bilibili.com/favicon.ico", text: "bilibili.com" },
     { src: "https://xiedaimala.com//favicon.ico", text: "xiedaimala.com" },
     { src: "https://developer.mozilla.org/favicon.ico", text: "developer.mozilla.org" },
     { src: "https://gitee.com/favicon.ico", text: "gitee.com" },
 ]
+
 //初始化数据
-let list = []
-for (let key in dataList) {
-    let li = $(`
+function append() {
+    let list = []
+    for (let key in dataList) {
+        let li = $(`
     <li title="${dataList[key].text}">
         <div class="logo">
             <img src="${dataList[key].src}">
@@ -24,15 +26,23 @@ for (let key in dataList) {
         </span>
     </li>
     `)
-    list.push(li)
+        list.push(li)
+    }
+    $ul.prepend(list)//添加到ul里面
 }
-$ul.prepend(list)//添加到ul里面
+
+//添加li标签
+append()
+
 //获取添加的li
-const liList = $(".mainContent > ul >li:not('.plus')")
+let liList = $(".mainContent > ul >li:not('.plus')")
+console.log(liList)
 //点击跳转
 $dataList.on('click', "li:not('.plus')", function (e) {
+    const dataList = JSON.parse(localStorage.getItem('x'))
     for (let i = 0; i < liList.length; i++) {
         if (e.currentTarget === liList[i]) {
+            console.log(2)
             let url = $(liList[i]).children()[1].innerText
             if (url.indexOf("https://") === -1) {
                 url = "https://" + url
@@ -43,7 +53,7 @@ $dataList.on('click', "li:not('.plus')", function (e) {
     }
 })
 //添加网址
-$puls.on('click', function (e) {
+$add.on('click', function (e) {
     let url2 = prompt("请输入你的网址")
     if (url2.indexOf("https://") === -1) {
         alert("请输入网址例如：https://www.baidu.com")
@@ -89,14 +99,15 @@ $puls.on('click', function (e) {
             $puls.before(dali)
             dataList.push(data)
             alert("添加网址" + data.text + "成功")
-            localStorage.setItem('x', JSON.stringify(dataList))
+            localStorage.setItem('data', JSON.stringify(dataList))
         }
-
     }
+    liList = $(".mainContent > ul >li:not('.plus')")
 })
 
 //删除
 liList.on('click', "span", function (e) {
+    console.log(liList)
     e.stopPropagation() // 阻止冒泡
     for (let i = 0; i < liList.length; i++) {
         if (this.title === liList[i].title) {
@@ -106,5 +117,5 @@ liList.on('click', "span", function (e) {
             console.log(dataList)
         }
     }
-    localStorage.setItem('x', JSON.stringify(dataList))
+    localStorage.setItem('data', JSON.stringify(dataList))
 })

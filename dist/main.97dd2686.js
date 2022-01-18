@@ -120,8 +120,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"epB2":[function(require,module,exports) {
 var $ul = $('.mainContent > ul');
 var $dataList = $('.dataList');
-var $puls = $('.plus');
-var dataList = JSON.parse(localStorage.getItem('x')) || [{
+var $add = $('.plus');
+var dataList = JSON.parse(localStorage.getItem('data')) || [{
   src: "https://www.baidu.com//favicon.ico",
   text: "baidu.com"
 }, {
@@ -138,21 +138,29 @@ var dataList = JSON.parse(localStorage.getItem('x')) || [{
   text: "gitee.com"
 }]; //初始化数据
 
-var list = [];
+function append() {
+  var list = [];
 
-for (var key in dataList) {
-  var li = $("\n    <li title=\"".concat(dataList[key].text, "\">\n        <div class=\"logo\">\n            <img src=\"").concat(dataList[key].src, "\">\n        </div>\n        <div class=\"text\">").concat(dataList[key].text, "</div>\n        <span class=\"span\" title=\"").concat(dataList[key].text, "\">\n            <svg class=\"icon\">\n                <use xlink:href=\"#icon-cha\"></use>\n            </svg>\n        </span>\n    </li>\n    "));
-  list.push(li);
-}
+  for (var key in dataList) {
+    var li = $("\n    <li title=\"".concat(dataList[key].text, "\">\n        <div class=\"logo\">\n            <img src=\"").concat(dataList[key].src, "\">\n        </div>\n        <div class=\"text\">").concat(dataList[key].text, "</div>\n        <span class=\"span\" title=\"").concat(dataList[key].text, "\">\n            <svg class=\"icon\">\n                <use xlink:href=\"#icon-cha\"></use>\n            </svg>\n        </span>\n    </li>\n    "));
+    list.push(li);
+  }
 
-$ul.prepend(list); //添加到ul里面
-//获取添加的li
+  $ul.prepend(list); //添加到ul里面
+} //添加li标签
 
-var liList = $(".mainContent > ul >li:not('.plus')"); //点击跳转
+
+append(); //获取添加的li
+
+var liList = $(".mainContent > ul >li:not('.plus')");
+console.log(liList); //点击跳转
 
 $dataList.on('click', "li:not('.plus')", function (e) {
+  var dataList = JSON.parse(localStorage.getItem('x'));
+
   for (var i = 0; i < liList.length; i++) {
     if (e.currentTarget === liList[i]) {
+      console.log(2);
       var url = $(liList[i]).children()[1].innerText;
 
       if (url.indexOf("https://") === -1) {
@@ -164,7 +172,7 @@ $dataList.on('click', "li:not('.plus')", function (e) {
   }
 }); //添加网址
 
-$puls.on('click', function (e) {
+$add.on('click', function (e) {
   var url2 = prompt("请输入你的网址");
 
   if (url2.indexOf("https://") === -1) {
@@ -200,12 +208,15 @@ $puls.on('click', function (e) {
       $puls.before(dali);
       dataList.push(data);
       alert("添加网址" + data.text + "成功");
-      localStorage.setItem('x', JSON.stringify(dataList));
+      localStorage.setItem('data', JSON.stringify(dataList));
     }
   }
+
+  liList = $(".mainContent > ul >li:not('.plus')");
 }); //删除
 
 liList.on('click', "span", function (e) {
+  console.log(liList);
   e.stopPropagation(); // 阻止冒泡
 
   for (var i = 0; i < liList.length; i++) {
@@ -217,7 +228,7 @@ liList.on('click', "span", function (e) {
     }
   }
 
-  localStorage.setItem('x', JSON.stringify(dataList));
+  localStorage.setItem('data', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.f65f2762.js.map
+//# sourceMappingURL=main.97dd2686.js.map
