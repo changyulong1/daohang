@@ -205,7 +205,7 @@ $add.on('click', function (e) {
     if (pan) {
       alert("这个网址已经添加过");
     } else {
-      $puls.before(dali);
+      $add.before(dali);
       dataList.push(data);
       alert("添加网址" + data.text + "成功");
       localStorage.setItem('data', JSON.stringify(dataList));
@@ -231,4 +231,4 @@ liList.on('click', "span", function (e) {
   localStorage.setItem('data', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.97dd2686.js.map
+//# sourceMappingURL=main.d3ca9f1d.js.map

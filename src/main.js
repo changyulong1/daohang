@@ -96,7 +96,7 @@ $add.on('click', function (e) {
             alert("这个网址已经添加过")
 
         } else {
-            $puls.before(dali)
+            $add.before(dali)
             dataList.push(data)
             alert("添加网址" + data.text + "成功")
             localStorage.setItem('data', JSON.stringify(dataList))
