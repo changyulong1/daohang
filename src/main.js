@@ -53,7 +53,8 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 //添加网址
 $add.on('click', function (e) {
     let url2 = prompt("请输入你的网址")
-    if (url2.indexOf("https://") === -1) {
+    console.log(url2)
+    if (url2 === null || url2.indexOf("https://") === -1) {
         alert("请输入网址例如：https://www.baidu.com")
     } else {
         const src = url2 + "/favicon.ico"

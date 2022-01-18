@@ -172,8 +172,9 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 
 $add.on('click', function (e) {
   var url2 = prompt("请输入你的网址");
+  console.log(url2);
 
-  if (url2.indexOf("https://") === -1) {
+  if (url2 === null || url2.indexOf("https://") === -1) {
     alert("请输入网址例如：https://www.baidu.com");
   } else {
     var src = url2 + "/favicon.ico";
@@ -223,4 +224,4 @@ $ul.on('click', "span", function (e) {
   localStorage.setItem('data', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.b6e5153f.js.map
+//# sourceMappingURL=main.3f334bef.js.map
