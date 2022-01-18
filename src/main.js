@@ -39,7 +39,7 @@ let liList = $(".mainContent > ul >li:not('.plus')")
 console.log(liList)
 //点击跳转
 $dataList.on('click', "li:not('.plus')", function (e) {
-    const dataList = JSON.parse(localStorage.getItem('x'))
+    const dataList = JSON.parse(localStorage.getItem('data'))
     for (let i = 0; i < liList.length; i++) {
         if (e.currentTarget === liList[i]) {
             console.log(2)
@@ -54,6 +54,7 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 })
 //添加网址
 $add.on('click', function (e) {
+    const dataList = JSON.parse(localStorage.getItem('data'))
     let url2 = prompt("请输入你的网址")
     if (url2.indexOf("https://") === -1) {
         alert("请输入网址例如：https://www.baidu.com")
@@ -103,10 +104,12 @@ $add.on('click', function (e) {
         }
     }
     liList = $(".mainContent > ul >li:not('.plus')")
+    console.log(liList)
+
 })
 
 //删除
-liList.on('click', "span", function (e) {
+$ul.on('click', "span", function (e) {
     console.log(liList)
     e.stopPropagation() // 阻止冒泡
     for (let i = 0; i < liList.length; i++) {

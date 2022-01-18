@@ -156,7 +156,7 @@ var liList = $(".mainContent > ul >li:not('.plus')");
 console.log(liList); //点击跳转
 
 $dataList.on('click', "li:not('.plus')", function (e) {
-  var dataList = JSON.parse(localStorage.getItem('x'));
+  var dataList = JSON.parse(localStorage.getItem('data'));
 
   for (var i = 0; i < liList.length; i++) {
     if (e.currentTarget === liList[i]) {
@@ -173,6 +173,7 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 }); //添加网址
 
 $add.on('click', function (e) {
+  var dataList = JSON.parse(localStorage.getItem('data'));
   var url2 = prompt("请输入你的网址");
 
   if (url2.indexOf("https://") === -1) {
@@ -213,9 +214,10 @@ $add.on('click', function (e) {
   }
 
   liList = $(".mainContent > ul >li:not('.plus')");
+  console.log(liList);
 }); //删除
 
-liList.on('click', "span", function (e) {
+$ul.on('click', "span", function (e) {
   console.log(liList);
   e.stopPropagation(); // 阻止冒泡
 
@@ -231,4 +233,4 @@ liList.on('click', "span", function (e) {
   localStorage.setItem('data', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.d3ca9f1d.js.map
+//# sourceMappingURL=main.0102ec45.js.map
