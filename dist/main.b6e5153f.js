@@ -171,7 +171,6 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 }); //添加网址
 
 $add.on('click', function (e) {
-  var dataList = JSON.parse(localStorage.getItem('data'));
   var url2 = prompt("请输入你的网址");
 
   if (url2.indexOf("https://") === -1) {
@@ -224,4 +223,4 @@ $ul.on('click', "span", function (e) {
   localStorage.setItem('data', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.643eeee7.js.map
+//# sourceMappingURL=main.b6e5153f.js.map

@@ -1,7 +1,7 @@
 const $ul = $('.mainContent > ul')
 const $dataList = $('.dataList')
 const $add = $('.plus')
-const dataList = JSON.parse(localStorage.getItem('data')) || [
+let dataList = JSON.parse(localStorage.getItem('data')) || [
     { src: "https://www.baidu.com//favicon.ico", text: "baidu.com" },
     { src: "https://www.bilibili.com/favicon.ico", text: "bilibili.com" },
     { src: "https://xiedaimala.com//favicon.ico", text: "xiedaimala.com" },
@@ -52,7 +52,6 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 })
 //添加网址
 $add.on('click', function (e) {
-    const dataList = JSON.parse(localStorage.getItem('data'))
     let url2 = prompt("请输入你的网址")
     if (url2.indexOf("https://") === -1) {
         alert("请输入网址例如：https://www.baidu.com")
