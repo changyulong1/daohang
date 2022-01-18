@@ -152,15 +152,13 @@ function append() {
 
 append(); //获取添加的li
 
-var liList = $(".mainContent > ul >li:not('.plus')");
-console.log(liList); //点击跳转
+var liList = $(".mainContent > ul >li:not('.plus')"); //点击跳转
 
 $dataList.on('click', "li:not('.plus')", function (e) {
   var dataList = JSON.parse(localStorage.getItem('data'));
 
   for (var i = 0; i < liList.length; i++) {
     if (e.currentTarget === liList[i]) {
-      console.log(2);
       var url = $(liList[i]).children()[1].innerText;
 
       if (url.indexOf("https://") === -1) {
@@ -191,14 +189,11 @@ $add.on('click', function (e) {
     for (var i = 0; i < dataList.length; i++) {
       var text1 = String(dataList[i].text);
       var text2 = String(data.text);
-      console.log(text1, text2, text2.indexOf(text1));
 
       if (text2.indexOf(text1) != -1) {
         pan = true;
-        console.log(2);
         break;
       } else {
-        console.log(1);
         pan = false;
       }
     }
@@ -214,23 +209,19 @@ $add.on('click', function (e) {
   }
 
   liList = $(".mainContent > ul >li:not('.plus')");
-  console.log(liList);
 }); //删除
 
 $ul.on('click', "span", function (e) {
-  console.log(liList);
   e.stopPropagation(); // 阻止冒泡
 
   for (var i = 0; i < liList.length; i++) {
     if (this.title === liList[i].title) {
-      console.log(liList[i]);
       liList[i].remove();
       dataList.splice(i, 1);
-      console.log(dataList);
     }
   }
 
   localStorage.setItem('data', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.0102ec45.js.map
+//# sourceMappingURL=main.643eeee7.js.map
