@@ -135,7 +135,7 @@ var dataList = JSON.parse(localStorage.getItem('x')) || [{
   text: "developer.mozilla.org"
 }, {
   src: "https://gitee.com/favicon.ico",
-  text: "www.gitee.com"
+  text: "gitee.com"
 }]; //初始化数据
 
 var list = [];
@@ -168,18 +168,40 @@ $puls.on('click', function (e) {
   var url2 = prompt("请输入你的网址");
 
   if (url2.indexOf("https://") === -1) {
-    console.log(6);
     alert("请输入网址例如：https://www.baidu.com");
   } else {
     var src = url2 + "/favicon.ico";
-    var text = url2.replace("https://www.", "").replace("/", "");
+    var text = url2.replace("https://", " ").replace("/", " ");
     var dali = $("\n            <li title=\"".concat(text, "\">\n                <div class=\"logo\">\n                    <img src=\"").concat(src, "\">\n                </div>\n                <div class=\"text\">").concat(text, "</div>\n                <span class=\"span\" title=\"").concat(text, "\" >\n                    <svg class=\"icon\">\n                        <use xlink:href=\"#icon-cha\"></use>\n                    </svg>\n                </span>\n            </li>\n        "));
-    $puls.before(dali);
-    dataList.push({
+    var data = {
       src: src,
       text: text
-    });
-    localStorage.setItem('x', JSON.stringify(dataList));
+    };
+    var pan;
+
+    for (var i = 0; i < dataList.length; i++) {
+      var text1 = String(dataList[i].text);
+      var text2 = String(data.text);
+      console.log(text1, text2, text2.indexOf(text1));
+
+      if (text2.indexOf(text1) != -1) {
+        pan = true;
+        console.log(2);
+        break;
+      } else {
+        console.log(1);
+        pan = false;
+      }
+    }
+
+    if (pan) {
+      alert("这个网址已经添加过");
+    } else {
+      $puls.before(dali);
+      dataList.push(data);
+      alert("添加网址" + data.text + "成功");
+      localStorage.setItem('x', JSON.stringify(dataList));
+    }
   }
 }); //删除
 
@@ -198,4 +220,4 @@ liList.on('click', "span", function (e) {
   localStorage.setItem('x', JSON.stringify(dataList));
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.39b92c27.js.map
+//# sourceMappingURL=main.f65f2762.js.map

@@ -6,7 +6,7 @@ const dataList = JSON.parse(localStorage.getItem('x')) || [
     { src: "https://www.bilibili.com/favicon.ico", text: "bilibili.com" },
     { src: "https://xiedaimala.com//favicon.ico", text: "xiedaimala.com" },
     { src: "https://developer.mozilla.org/favicon.ico", text: "developer.mozilla.org" },
-    { src: "https://gitee.com/favicon.ico", text: "www.gitee.com" },
+    { src: "https://gitee.com/favicon.ico", text: "gitee.com" },
 ]
 //初始化数据
 let list = []
@@ -46,11 +46,10 @@ $dataList.on('click', "li:not('.plus')", function (e) {
 $puls.on('click', function (e) {
     let url2 = prompt("请输入你的网址")
     if (url2.indexOf("https://") === -1) {
-        console.log(6)
         alert("请输入网址例如：https://www.baidu.com")
     } else {
         const src = url2 + "/favicon.ico"
-        const text = url2.replace("https://www.", "").replace("/", "")
+        const text = url2.replace("https://", " ").replace("/", " ")
         const dali = $(
             `
             <li title="${text}">
@@ -65,12 +64,34 @@ $puls.on('click', function (e) {
                 </span>
             </li>
         `)
-        $puls.before(dali)
-        dataList.push({
+        const data = {
             src: src,
             text: text
-        })
-        localStorage.setItem('x', JSON.stringify(dataList))
+        }
+        let pan
+        for (let i = 0; i < dataList.length; i++) {
+            const text1 = String(dataList[i].text)
+            const text2 = String(data.text)
+            console.log(text1, text2, text2.indexOf(text1))
+            if (text2.indexOf(text1) != -1) {
+                pan = true
+                console.log(2)
+                break
+            } else {
+                console.log(1)
+                pan = false
+            }
+        }
+        if (pan) {
+            alert("这个网址已经添加过")
+
+        } else {
+            $puls.before(dali)
+            dataList.push(data)
+            alert("添加网址" + data.text + "成功")
+            localStorage.setItem('x', JSON.stringify(dataList))
+        }
+
     }
 })
 
